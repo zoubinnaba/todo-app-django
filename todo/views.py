@@ -23,3 +23,21 @@ def todo_create(request):
         return redirect('/')
     return render(request, 'todo/todo_create.html', {'form': form})
     
+
+def todo_update(request, id):
+    todo = Todo.objects.get(id=id)
+    form = TodoForm(request.POST or None, instance=todo)
+    if form.is_valid():
+        # create the todo object
+        # name = form.cleaned_data['name']
+        # due_date = form.cleaned_data['due_date']
+        # new_todo = Todo.objects.create(name=name, due_date=due_date)
+        form.save()
+        return redirect('/')
+    return render(request, 'todo/todo_update.html', {'form': form})
+
+
+def todo_delete(request, id):
+    todo = Todo.objects.get(id=id)
+    todo.delete()
+    return redirect('/')
