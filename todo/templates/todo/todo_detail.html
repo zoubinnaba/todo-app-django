@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crash course</title>
-</head>
-<body>
-    The todo name is: {{ todo.name }}
-    The due date is {{ todo.due_date }}
-    <br>
-    <a href="/{{ todo.id }}/update">Update this todo</a>
-    <br>
-    <a href="/{{ todo.id }}/delete">Delete this todo</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="has-text-centered mb-3">
+        <a class="button is-default" href="/">Go Home</a>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <div class="card mb-4">
+                <div class="crad-header">
+                    <p class="card-header-title">{{ todo.name }}</p>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        It's due {{ todo.due_date }}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="button is-primary ml-2 mb-2" href="/{{ todo.id }}/update">Update</a>
+                    <a class="button is-danger ml-2 mb-2" href="/{{ todo.id }}/delete">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,22 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crash course</title>
-</head>
-<body>
-    {% if request.user.is_authenticated %}
-        Hello {{ request.user.username }}
-    {% else %}
-        Hello Anonymous user
-    {% endif %}
-    <a href="/create">Create a todo</a>
-    <ul>
-        {% for todo in todo_list %}
-            <li><a href="/{{ todo.id }}">{{ todo.name }}</a>, it's due {{ todo.due_date }}</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="has-text-centered mb-3">
+        <p class="mb-3">
+            {% if request.user.is_authenticated %}
+            Hello {{ request.user.username }}
+            {% else %}
+                Hello Anonymous user
+            {% endif %}
+        </p>
+        <a class="button is-primary" href="/create">Create a todo</a>
+    </div>
+    <div class="columns">
+        <div class="column">
+            {% for todo in todo_list %}
+            <div class="card mb-4">
+                <div class="crad-header">
+                    <p class="card-header-title"><a href="/{{ todo.id }}">{{ todo.name }}</a></p>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        It's due {{ todo.due_date }}
+                    </div>
+                  </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
